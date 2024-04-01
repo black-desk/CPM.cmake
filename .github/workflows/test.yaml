@@ -47,8 +47,10 @@ jobs:
 
       - name: unit tests
         run: |
-          cmake -Stest -Bbuild/test
-          cmake --build build/test --target test-verbose
+          mkdir -p build/test
+          cd build/test
+          cmake ../../test
+          cmake --build . --target test-verbose
         env:
           CMAKE_VERSION: ${{ matrix.cmake_version }}
 
