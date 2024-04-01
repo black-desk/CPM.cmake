@@ -24,7 +24,7 @@ For everything else, the targets can be created manually after the dependency ha
 ## Full CMakeLists Example
 
 ```cmake
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.11.4 FATAL_ERROR)
 
 # create project
 project(MyProject)
