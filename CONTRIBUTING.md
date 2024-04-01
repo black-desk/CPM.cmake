@@ -116,7 +116,7 @@ They usually make use of some of the helper assertions defined in the [testing.c
 An example unit test for checking the `cpm_get_version_from_git_tag` function could look like the following.
 
 ```cmake
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.11.4 FATAL_ERROR)
 
 include(${CPM_PATH}/CPM.cmake)
 include(${CPM_PATH}/testing.cmake)

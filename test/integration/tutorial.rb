@@ -17,7 +17,7 @@ class Tutorial < IntegrationTest
     SRC
 
     prj.create_file 'CMakeLists.txt', <<~SRC
-      cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+      cmake_minimum_required(VERSION 3.11.4 FATAL_ERROR)
       project(using-adder)
       set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
       include("%{cpm_path}")

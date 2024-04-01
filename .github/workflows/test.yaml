@@ -12,6 +12,7 @@ jobs:
   tests:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         # windows-latest is windows-2019 which carries a pretty old version of ruby (2.5)
         # we need at least ruby 2.7 for the tests
@@ -19,7 +20,17 @@ jobs:
         os: [ubuntu-latest, windows-2022, macos-latest]
         # we want to ensure compatibility with a recent CMake version as well as the lowest officially supported
         # legacy version that we define as the default version of the second-latest Ubuntu LTS release currently available
-        cmake_version: ['3.16.3', '3.27.5']
+        cmake_version:
+          - 3.11.4 # RHEL 8
+          - 3.13.4 # Debian 9
+          - 3.16.3 # Ubuntu 20.04
+          - 3.18.4 # Debian 10
+          - 3.20.2 # RHEL 9
+          - 3.22.1 # Ubuntu 22.04
+          - 3.25.1 # Debian 11 & Ubuntu 23.04
+          - 3.27.4 # Ubuntu 23.10
+          - 3.28.3 # Debian 12
+          - ''     # latest
         exclude:
           # there seems to be an issue with CMake 3.16 not finding a C++ compiler on windows-2022 
           - os: windows-2022
@@ -36,8 +47,10 @@ jobs:
 
       - name: unit tests
         run: |
-          cmake -Stest -Bbuild/test
-          cmake --build build/test --target test-verbose
+          mkdir -p build/test
+          cd build/test
+          cmake ../../test
+          cmake --build . --target test-verbose
         env:
           CMAKE_VERSION: ${{ matrix.cmake_version }}
 
